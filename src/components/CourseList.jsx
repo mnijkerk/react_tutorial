@@ -5,20 +5,24 @@ import '../CourseList.css';
 
 
 const CourseList = ({schedule}) => (
+    
     <div className='courseList'>
         
         { Object.entries(schedule.courses).map(([id, course]) => 
         
         // hello
         <div className="courseTile">
+
+            <div className="courseNumberDescription">
                 <h3>{course.term} CS {course.number} </h3>
                 <p> {course.title} </p>
-                <div className="meetingTime"> 
-                    {course.meets}
-                </div>
+            </div>
+            
+            <div className="meetingTime"> 
+                {course.meets}
+            </div>
         </div>
         )} 
-
     </div>
 )
   export default CourseList; 

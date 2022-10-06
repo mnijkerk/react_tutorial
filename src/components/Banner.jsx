@@ -1,4 +1,4 @@
 const Banner = ({schedule}) => (
-    <div> <h1>{schedule.title}</h1></div>
+    <h1>{schedule.title}</h1>
   );
   export default Banner; 

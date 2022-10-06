@@ -39,39 +39,24 @@ const schedule = {
 
 
 const App = () => {
-  
-
-
-  const [count, setCount] = useState(0);
-
-  const today = new Date(); 
-  const day = today.toLocaleString([], {weekday: 'long'}); 
-  const date = today.toLocaleDateString([], {dateStyle: 'long'}); 
-
   return (
     <div className="App">
+      
       <header className="App-header">
         <Banner schedule = {schedule} />
-        <img src={logo} className="App-logo" alt="logo" />
-
-
-        <div className='bodyApp'>
-          
-          <p> 
-          <CourseList schedule= {schedule} /> 
-          </p>
-
-        </div>
-        
-        
+        <img src={logo} className="App-logo" alt="logo" />       
       </header>
+
+      
+      <body className='App-body'>
+        
+        <CourseList schedule= {schedule} /> 
+
+      </body>
 
 
     </div>
-
-
   );
-
 };
 
 export default App;
