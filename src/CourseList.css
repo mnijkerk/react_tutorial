@@ -1,0 +1,29 @@
+
+.courseList{ 
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 14rem);
+  width: 100%; 
+  }
+  
+  .courseTile { 
+    text-align:  left;
+    border: solid 1px #FFFFFF; 
+    border-radius: 10px; 
+    padding: 20px;
+    align-content:space-between;
+    align-items: end; 
+    font-size: 20px; 
+    margin: 20px; 
+  }
+
+  .meetingTime{ 
+
+    border-top: solid 1px white; 
+
+  }
+
+  .help{ 
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+  }

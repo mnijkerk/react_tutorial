@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import CourseList from './components/CourseList';
 import Banner from './components/Banner'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import './CourseList.css'
 
 const schedule = {
   "title": "CS Courses for 2018-2019",
@@ -36,6 +39,9 @@ const schedule = {
 
 
 const App = () => {
+  
+
+
   const [count, setCount] = useState(0);
 
   const today = new Date(); 
@@ -47,13 +53,20 @@ const App = () => {
       <header className="App-header">
         <Banner schedule = {schedule} />
         <img src={logo} className="App-logo" alt="logo" />
-        <CourseList schedule= {schedule} /> 
-        <p> 
-          Today is {day}, {date}. 
-        </p>
 
+
+        <div className='bodyApp'>
+          
+          <p> 
+          <CourseList schedule= {schedule} /> 
+          </p>
+
+        </div>
+        
         
       </header>
+
+
     </div>
 
 

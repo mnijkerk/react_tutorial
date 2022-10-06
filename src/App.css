@@ -16,9 +16,9 @@
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
@@ -41,6 +41,13 @@ button {
   font-size: calc(10px + 2vmin);
 }
 
-.courseList{ 
-  text-align: left; 
+h3 { 
+  font-size: 20px; 
+}
+
+.bodyApp{ 
+  background-color: #282c34;
+  /* border: 1px solid white;  */
+  min-height: 20vmin;
+
 }
