@@ -1,5 +1,6 @@
 
 .courseList{ 
+  padding-top: 3rem; 
   display: grid;
   grid-template-columns: repeat(auto-fit, 14rem);
   grid-gap: 3rem; 
@@ -9,11 +10,12 @@
   
 .courseTile { 
   text-align:  left;
-  border: solid 1px #FFFFFF; 
+  color: white; 
   border-radius: 10px; 
   padding: 20px;
   border: 1px solid white; 
   align-content: space-between;
+  background-color: #282c34;
 }
 
 .courseNumberDescription { 
@@ -21,6 +23,32 @@
 }
 
 .meetingTime{ 
-  border-top: solid 1px white; 
+  border-top: solid 1px #282c34; 
   max-height: 3rem;
+}
+
+.filterButtons{ 
+
+  border: 1px solid black;
+  border-radius: 5px; 
+  width: 14rem; 
+  height: 5rem; 
+  font-size: 40px; 
+  margin: 10px;
+
+
+}
+.filterButtons:hover{ 
+  color: gray; 
+}
+.filterButton{ 
+  width: 14rem; 
+  height: 4rem;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin: 10px; 
+  vertical-align: center;
+}
+.filterButton:hover{ 
+  background-color: grey; 
 }
