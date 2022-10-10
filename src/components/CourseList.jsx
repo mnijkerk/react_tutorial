@@ -1,33 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../CourseList.css";
-
+// import ProductList from './ProductList'
+import FilterButton from "../FilterButton";
 import { useState } from "react";
 
-// const terms = {
-//   Fall: "Breakfast items...",
-//   Winter: "Lunch items...",
-//   Spring: "Dinner items...",
-// };
-
-const terms = ['Fall', 'Winter', 'Spring'];
-
-const FilterButton = ({ term, selection, setSelection }) => (
-  <button className="filterButtons" >
-    <input
-      type="radio"
-      id={term}
-      className="btn-check"
-      checked={term === selection}
-      autoComplete="off"
-      onChange={() => setSelection(term)}
-    />
-    <label htmlFor={term}>
-      {term}
-      
-    </label>
-  </button>
-);
+const terms = ["Fall", "Winter", "Spring"];
 
 const FilterSelector = ({ selection, setSelection }) => (
   <div className="btn-group">
@@ -42,7 +20,12 @@ const FilterSelector = ({ selection, setSelection }) => (
   </div>
 );
 
-const FilteredTiles = ({ schedule, termSelection }) => {
+const CourseTiles = ({
+  schedule,
+  termSelection,
+  selectedCourses,
+  toggleSelected,
+}) => {
   const filteredSchedule = Object.entries(schedule.courses).filter(
     ([id, course]) => course.term == termSelection
   );
@@ -50,7 +33,7 @@ const FilteredTiles = ({ schedule, termSelection }) => {
   return (
     <div className="courseList">
       {filteredSchedule.map(([id, course]) => (
-        <div className="courseTile">
+        <div className={`courseTile${selectedCourses.includes(id) ? 'selected' : ''}`} onClick={() => toggleSelected(id)}>
           <div className="courseNumberDescription">
             <h3>
               {course.term} CS {course.number}{" "}
@@ -66,14 +49,32 @@ const FilteredTiles = ({ schedule, termSelection }) => {
 };
 
 const CourseList = ({ schedule }) => {
-    const [selection, setSelection] = useState(() => terms[0]);
-    return (
-      <div>
-        <FilterSelector selection={selection} setSelection={setSelection} />
-        <FilteredTiles schedule={schedule} termSelection={selection} />
-      </div>
+
+  const [selectedCourses, setCourseSelection] = useState([]);
+
+  const [selection, setSelection] = useState(() => terms[0]);
+
+
+  const toggleSelected = (item) =>
+    setCourseSelection(
+      selectedCourses.includes(item)
+        ? selectedCourses.filter((x) => x !== item)
+        : [...selectedCourses, item]
     );
-  };
-  
-  export default CourseList;
-  
+
+    console.log(selectedCourses)
+
+  return (
+    <div>
+      <FilterSelector selection={selection} setSelection={setSelection} />
+      <CourseTiles
+        schedule={schedule}
+        termSelection={selection}
+        selectedCourses={selectedCourses}
+        toggleSelected={toggleSelected}
+      />
+    </div>
+  );
+};
+
+export default CourseList;
