@@ -1,0 +1,32 @@
+.modal {
+  display: block;
+  visibility: hidden;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;  
+}
+
+.modal-show {
+  visibility: visible;
+  background-color: rgba(169, 169, 169, 0.8);
+  transition: opacity 0.2s linear;
+}
+
+.modal-content {
+  opacity: 0;
+}
+
+.modal-show .modal-content {
+  opacity: 1;
+  transition: 0.2s linear;
+}
+
+.modal-header {
+  margin-left: auto;
+  
+}
+
+.modal-body { 
+    justify-content: center;
+    border-top: 1px solid black ; 
+}

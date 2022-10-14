@@ -1,0 +1,14 @@
+.cart { 
+    background-color: white;  
+    color: black; 
+    justify-content: center;
+}
+
+.cartRow { 
+    align-items: center;
+    justify-content: center;
+    display: grid; 
+    grid-template-columns: 5rem 15rem auto;
+    border-bottom: 1px solid grey;
+    width: 25rem;
+}

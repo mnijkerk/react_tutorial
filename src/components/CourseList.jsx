@@ -1,7 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../CourseList.css";
-// import ProductList from './ProductList'
+import Modal from "./Modal";
+import Cart from "./Cart";
 import FilterButton from "../FilterButton";
 import { useState } from "react";
 
@@ -33,7 +34,12 @@ const CourseTiles = ({
   return (
     <div className="courseList">
       {filteredSchedule.map(([id, course]) => (
-        <div className={`courseTile${selectedCourses.includes(id) ? 'selected' : ''}`} onClick={() => toggleSelected(id)}>
+        <div
+          className={`courseTile${
+            selectedCourses.includes(id) ? "selected" : ""
+          }`}
+          onClick={() => toggleSelected(id)}
+        >
           <div className="courseNumberDescription">
             <h3>
               {course.term} CS {course.number}{" "}
@@ -49,11 +55,14 @@ const CourseTiles = ({
 };
 
 const CourseList = ({ schedule }) => {
-
   const [selectedCourses, setCourseSelection] = useState([]);
 
   const [selection, setSelection] = useState(() => terms[0]);
 
+  const [open, setOpen] = useState(false);
+
+  const openModal = () => setOpen(true);
+  const closeModal = () => setOpen(false);
 
   const toggleSelected = (item) =>
     setCourseSelection(
@@ -62,11 +71,17 @@ const CourseList = ({ schedule }) => {
         : [...selectedCourses, item]
     );
 
-    console.log(selectedCourses)
+
 
   return (
     <div>
       <FilterSelector selection={selection} setSelection={setSelection} />
+      <Modal open={open} close={closeModal}>
+        <Cart schedule={schedule} selected={selectedCourses} />
+      </Modal>
+      <button className="cartButton" onClick={openModal}>
+        View Cart{" "}
+      </button>
       <CourseTiles
         schedule={schedule}
         termSelection={selection}
