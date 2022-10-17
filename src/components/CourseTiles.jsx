@@ -90,7 +90,9 @@ const CourseTiles = ({
               :""
             //   selectedCourses.includes(id) ? "selected" : selectedFilteredId.included(id) ? "unavailable" : ""
             }`}
-            onClick={() => toggleSelected(id)}
+            onClick={() => {!selectedFilteredId.includes(id)
+                ? console.log("cannot add")
+                :toggleSelected(id)}}
           >
             <div className="courseNumberDescription">
               <h3>
