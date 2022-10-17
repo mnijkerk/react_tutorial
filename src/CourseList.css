@@ -31,6 +31,16 @@
   /* border: 1px solid green;  */
 }
 
+.courseTilenotAvailable {
+  text-align: left;
+  color: grey;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid red;
+  align-content: space-between;
+  background-color: black;
+}
+
 .meetingTime {
   border-top: solid 1px #ffffff;
   max-height: 3rem;

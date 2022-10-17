@@ -2,7 +2,7 @@ import "../Cart.css";
 
 const Cart = ({ schedule, selected }) => {
     const courses = schedule.courses;
-    console.log(courses)
+    // console.log(courses)
   return (
     <div className="cart">
       {selected.length === 0 ? (
