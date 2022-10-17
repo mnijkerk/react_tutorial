@@ -26,8 +26,6 @@ const CourseTiles = ({
 
   const doesOverLap = (meetDataObj1, meetDataObj2) => {
 
-    // console.log("doesOverLap: ", meetDataObj1)
-    // console.log("doesOverlap 2: ", meetDataObj2)
     if (meetDataObj1.day == meetDataObj2.day) {
       if (
         meetDataObj1.startTime < meetDataObj2.endTime &&
@@ -52,28 +50,17 @@ const CourseTiles = ({
   const testClass = "F343"; 
   const testClassData = schedule.courses[testClass]; 
   const TestClassMeet = timeObjectConverter(testClassData.meets); 
-
-//   console.log(filteredSchedule.filter(([classID, classData]) => !doesOverLap(TestClassMeet, timeObjectConverter(classData.meets))))
-
   let selectedFiltered = filteredSchedule; 
   
   selectedCoursesData.forEach( item => {
     selectedFiltered = selectedFiltered.filter(([classID, classData]) => !doesOverLap(timeObjectConverter(item.meets), timeObjectConverter(classData.meets)))
   })
 
-//   console.log("Selected filtered", selectedFiltered)
-
   const selectedFilteredId = selectedFiltered.map(([classID, classData]) => classID)
 
-  console.log("ID of available ", selectedFilteredId)
   // filteredSchedule: array of objects[courseID, courseData]
   // selectedCourses: array of courseID
   // selectedCoursesData: array of objects[courseID, courseData]
-
-  //What do we need?
-  // 1. Create a list of classes that dont conflict
-  // 2. Each course in selected coursesData - get a list of classes that dont conflict
-  // 3. Get a list of the filtered list that dont overlap
 
   return (
     <div className="courseList">
@@ -88,9 +75,10 @@ const CourseTiles = ({
               : !selectedFilteredId.includes(id)
               ? "notAvailable" 
               :""
-            //   selectedCourses.includes(id) ? "selected" : selectedFilteredId.included(id) ? "unavailable" : ""
             }`}
-            onClick={() => {!selectedFilteredId.includes(id)
+            onClick={() => {selectedCourses.includes(id)
+                ?toggleSelected(id)
+                : !selectedFilteredId.includes(id)
                 ? console.log("cannot add")
                 :toggleSelected(id)}}
           >
