@@ -1,0 +1,37 @@
+.courseForm{ 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem; 
+}
+
+.courseFormBlock{ 
+    text-align: left; 
+    display: flex; 
+    flex-direction: column; 
+    width: 80%; 
+    max-width: 600px;
+}
+
+.courseFormLabel{ 
+
+    min-height: 3rem; 
+
+}
+
+.courseFormInput{ 
+    min-height: 3rem;
+}
+
+.courseFormButtonsBlock{
+    margin-top: 5rem; 
+    display: flex; 
+    gap: 3rem; 
+}
+.courseFormButton{ 
+
+    width: 10rem; 
+    height: 3rem; 
+    border-radius: 3px; 
+
+}

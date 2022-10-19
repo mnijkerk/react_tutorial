@@ -1,0 +1,58 @@
+.courseList {
+    width: 80%; 
+    padding-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 14rem);
+    grid-gap: 3rem;
+    justify-content: center;
+  }
+  
+  .courseTile {
+    background-color: #eaecef;
+    color: #282c34;
+    border: 1px solid white; 
+    border-radius: 5px; 
+    height: 15rem; 
+    display: grid; 
+    grid-template-rows: 60%  20% 20%;
+  }
+  .courseNumberDescription{ 
+    padding: 10px;
+    vertical-align: center;
+  }
+  .meetingTime{ 
+    padding: 10px; 
+  }
+  .editClass{ 
+    background-color: #282c34 ;
+    border: 1px solid white; 
+    border-radius: 5px; 
+    color: white; 
+    width: 80%;
+    height: 80%;
+  }
+  .editClass:hover{ 
+    background-color: #1d2026; 
+  }
+  
+  .courseTileselected {
+    background-color: #b1b8c3 ;
+    color: #282c34;
+    border: 1px solid white; 
+    border-radius: 5px; 
+    height: 15rem; 
+    display: grid; 
+    grid-template-rows: 60%  20% 20%;
+  }
+  
+ .courseTilenotAvailable{
+
+    background-color: #121417;
+    color: #282c34;
+    border: 1px solid white; 
+    border-radius: 5px; 
+    height: 15rem; 
+    display: grid; 
+    grid-template-rows: 60%  20% 20%;
+  }
+  

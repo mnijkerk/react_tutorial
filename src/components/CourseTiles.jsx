@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import "../CourseTiles.css";
 const CourseTiles = ({
   schedule,
   termSelection,
@@ -25,7 +27,6 @@ const CourseTiles = ({
   };
 
   const doesOverLap = (meetDataObj1, meetDataObj2) => {
-
     if (meetDataObj1.day == meetDataObj2.day) {
       if (
         meetDataObj1.startTime < meetDataObj2.endTime &&
@@ -46,17 +47,24 @@ const CourseTiles = ({
     (courseID) => schedule.courses[courseID]
   );
 
+  const testClass = "F343";
+  const testClassData = schedule.courses[testClass];
+  const TestClassMeet = timeObjectConverter(testClassData.meets);
+  let selectedFiltered = filteredSchedule;
 
-  const testClass = "F343"; 
-  const testClassData = schedule.courses[testClass]; 
-  const TestClassMeet = timeObjectConverter(testClassData.meets); 
-  let selectedFiltered = filteredSchedule; 
-  
-  selectedCoursesData.forEach( item => {
-    selectedFiltered = selectedFiltered.filter(([classID, classData]) => !doesOverLap(timeObjectConverter(item.meets), timeObjectConverter(classData.meets)))
-  })
+  selectedCoursesData.forEach((item) => {
+    selectedFiltered = selectedFiltered.filter(
+      ([classID, classData]) =>
+        !doesOverLap(
+          timeObjectConverter(item.meets),
+          timeObjectConverter(classData.meets)
+        )
+    );
+  });
 
-  const selectedFilteredId = selectedFiltered.map(([classID, classData]) => classID)
+  const selectedFilteredId = selectedFiltered.map(
+    ([classID, classData]) => classID
+  );
 
   // filteredSchedule: array of objects[courseID, courseData]
   // selectedCourses: array of courseID
@@ -70,17 +78,19 @@ const CourseTiles = ({
         return (
           <div
             className={`courseTile${
-              selectedCourses.includes(id) 
-              ? "selected" 
-              : !selectedFilteredId.includes(id)
-              ? "notAvailable" 
-              :""
+              selectedCourses.includes(id)
+                ? "selected"
+                : !selectedFilteredId.includes(id)
+                ? "notAvailable"
+                : ""
             }`}
-            onClick={() => {selectedCourses.includes(id)
-                ?toggleSelected(id)
+            onClick={() => {
+              selectedCourses.includes(id)
+                ? toggleSelected(id)
                 : !selectedFilteredId.includes(id)
                 ? console.log("cannot add")
-                :toggleSelected(id)}}
+                : toggleSelected(id);
+            }}
           >
             <div className="courseNumberDescription">
               <h3>
@@ -90,6 +100,9 @@ const CourseTiles = ({
             </div>
 
             <div className="meetingTime">{course.meets}</div>
+            <Link to={`/course_info/${id}`}><button className="editClass">
+              Edit Class
+            </button></Link>
           </div>
         );
       })}

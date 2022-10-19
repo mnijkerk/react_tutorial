@@ -1,6 +1,7 @@
 
 h1 { 
   font-size: 80px; 
+  /* color: red;  */
 }
 
 h2 { 
@@ -24,7 +25,7 @@ h4{
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
 }
 
@@ -37,10 +38,12 @@ h4{
 .App-header {
   background-color: #282c34;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
   padding: 6rem; 
-  /* border: 3px solid green; */
+  
+}
+.App-title{ 
+  font-size: 40px; 
 }
 
 .App-link {

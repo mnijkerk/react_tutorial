@@ -6,6 +6,7 @@ import Cart from "./Cart";
 import FilterButton from "../FilterButton";
 import CourseTiles from "./CourseTiles";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const terms = ["Fall", "Winter", "Spring"];
 
@@ -22,9 +23,7 @@ const FilterSelector = ({ selection, setSelection }) => (
   </div>
 );
 
-
 const CourseList = ({ schedule }) => {
-
   const [selectedCourses, setCourseSelection] = useState([]);
   const [filterOption, setFilterOption] = useState(() => terms[0]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -40,14 +39,20 @@ const CourseList = ({ schedule }) => {
     );
 
   return (
-    <div>
-      <FilterSelector selection={filterOption} setSelection={setFilterOption} />
-      <Modal open={modalOpen} close={closeModal}>
-        <Cart schedule={schedule} selected={selectedCourses} />
-      </Modal>
-      <button className="cartButton" onClick={openModal}>
-        View Cart{" "}
-      </button>
+    <div className="courses">
+      <div className="filterCartButtons">
+        <FilterSelector
+          selection={filterOption}
+          setSelection={setFilterOption}
+        />
+        <Modal open={modalOpen} close={closeModal}>
+          <Cart schedule={schedule} selected={selectedCourses} />
+        </Modal>
+        <button className="cartButton" onClick={openModal}>
+          View Cart{" "}
+        </button>
+      </div>
+
       <CourseTiles
         schedule={schedule}
         termSelection={filterOption}
