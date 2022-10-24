@@ -1,38 +1,109 @@
-import { useLocation, Link} from "react-router-dom";
+import { useLocation, Link, Navigate } from "react-router-dom";
 import "../CourseForm.css";
-const CourseForm = ({ schedule }) => {
+import { useState } from "react";
 
+const useFormData = (validator = null, values = {}) => {
+  const [state, setState] = useState(() => ({ values }));
+
+  const change = (evt) => {
+    const { id, value } = evt.target;
+    const error = validator ? validator(id, value) : "";
+    evt.target.setCustomValidity(error);
+
+    const values = { ...state.values, [id]: value };
+    const errors = { ...state.errors, [id]: error };
+    const hasError = Object.values(errors).some((x) => x !== "");
+    setState(hasError ? { values, errors } : { values });
+  };
+
+  return [state, change];
+};
+
+const validateUserData = (key, val) => {
+  const dayOptions = {
+    M: "Monday",
+    Tu: "Tuesday",
+    W: "Wednesday",
+    Th: "Thursday",
+    F: "Friday",
+    Sa: "Saturday",
+    Su: "Sunday",
+  };
+
+  switch (key) {
+    case "title":
+      return /(^\w\w)/.test(val) ? "" : "must be least two characters";
+    case "meets":
+      const days = val.split(" ")[0];
+      let dayFormatFlag = false;
+      let hourFormatFlag = false;
+
+      for (var i = 0; i < days.length; i++) {
+        const day = days.charAt(i);
+        dayOptions[day] === undefined
+          ? (dayFormatFlag = true)
+          : (dayFormatFlag = false);
+      }
+
+      if (val.split(" ").length <= 1) {
+        hourFormatFlag = true;
+      }
+
+      return dayFormatFlag == true || hourFormatFlag == true
+        ? "must contain days and start-end, e.g., MWF 12:00-13:20"
+        : "";
+
+    default:
+      return "";
+  }
+};
+
+const InputField = ({ name, text, state, change }) => {
+  return (
+    <div className="mb-3">
+      <label htmlFor={name} className="form-label">
+        {text}
+      </label>
+      <input
+        className="form-control"
+        id={name}
+        name={name}
+        defaultValue={state.values?.[name]}
+        onChange={change}
+      />
+      <div className="invalid-feedback">{state.errors?.[name]}</div>
+    </div>
+  );
+};
+
+const CourseForm = ({ schedule }) => {
   const location = useLocation();
   const courseID = location.pathname.split("/")[2];
   const course = schedule.courses[courseID];
+  const [state, change] = useFormData(validateUserData, course);
+  const submit = (evt) => {};
 
-  const submit = () => { 
-
-  }
   return (
-    <form onSubmit={submit} className="courseForm">
+    <form
+      onSubmit={submit}
+      noValidate
+      id="courseForm"
+      className={state.errors ? "was-validated" : ".courseForm"}
+    >
       <div className="courseFormBlock">
-        <label className="courseFormLabel">
-          <h2>Course Name</h2>
-        </label>
-        <input
-          className="courseFormInput"
-          defaultValue={`${course.title}`}
-        ></input>
+        <InputField name="title" text="Title" state={state} change={change} />{" "}
       </div>
       <div className="courseFormBlock">
-        <label className="courseFormLabel">
-          <h2>Course Meets</h2>
-        </label>
-        <input
-          className="courseFormInput"
-          defaultValue={`${course.meets}`}
-        ></input>
+        <InputField name="meets" text="Meets" state={state} change={change} />
       </div>
 
       <div className="courseFormButtonsBlock">
-      <Link to={`/`}><button className="courseFormButton">Cancel</button></Link>
-        <button className="courseFormButton" disabled={true}>Submit</button>
+        <Link to={`/`}>
+          <button className="courseFormButton">Cancel</button>
+        </Link>
+        <button className="courseFormButton" disabled={true}>
+          Submit
+        </button>
       </div>
     </form>
   );

@@ -3,12 +3,31 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "../CourseList.css";
 import Modal from "./Modal";
 import Cart from "./Cart";
-import FilterButton from "../FilterButton";
 import CourseTiles from "./CourseTiles";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const terms = ["Fall", "Winter", "Spring"];
+
+
+
+const FilterButton = ({ term, selection, setSelection }) => (
+  <button
+    className="filterButton"
+  >
+    <input
+      type="radio"
+      id={term}
+      className="btn-check"
+      checked={term === selection}
+      autoComplete="off"
+      onChange={() => setSelection(term)}
+    />
+    <label htmlFor={term}>{term}</label>
+  </button>
+);
+
+
 
 const FilterSelector = ({ selection, setSelection }) => (
   <div className="btn-group">
