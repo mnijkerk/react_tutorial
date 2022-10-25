@@ -1,6 +1,8 @@
-import { useLocation, Link, Navigate } from "react-router-dom";
+import { useLocation, Link, Navigate, useNavigate } from "react-router-dom";
 import "../CourseForm.css";
 import { useState } from "react";
+import { useDbUpdate } from "../utilities/firebase";
+
 
 const useFormData = (validator = null, values = {}) => {
   const [state, setState] = useState(() => ({ values }));
@@ -77,12 +79,21 @@ const InputField = ({ name, text, state, change }) => {
 };
 
 const CourseForm = ({ schedule }) => {
+  const navigate = useNavigate(); 
   const location = useLocation();
   const courseID = location.pathname.split("/")[2];
   const course = schedule.courses[courseID];
   const [state, change] = useFormData(validateUserData, course);
-  const submit = (evt) => {};
-
+  const [update, result] = useDbUpdate(`/courses/${courseID}`)
+  const submit = (evt) => {
+    evt.preventDefault();
+    if (!state.errors) {
+      update(state.values);
+      navigate(-1); 
+    }
+  };
+   
+  console.log("State: ", state.values)
   return (
     <form
       onSubmit={submit}
@@ -101,7 +112,7 @@ const CourseForm = ({ schedule }) => {
         <Link to={`/`}>
           <button className="courseFormButton">Cancel</button>
         </Link>
-        <button className="courseFormButton" disabled={true}>
+        <button className="courseFormButton" onClick={submit} disabled={false}>
           Submit
         </button>
       </div>
