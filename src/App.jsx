@@ -13,6 +13,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useDbData } from "./utilities/firebase";
 import { signInWithGoogle, useAuthState, signOut } from "./utilities/firebase";
 
+
 const Main = () => {
   const [schedule, error] = useDbData("/");
 

@@ -1,13 +1,21 @@
 import { Link } from "react-router-dom";
 import "../CourseTiles.css";
 import { useAuthState } from "../utilities/firebase";
-
+import { useProfile } from "../utilities/profile";
 const CourseTiles = ({
   schedule,
   termSelection,
   selectedCourses,
   toggleSelected,
 }) => {
+
+  const [profile, profileLoading, profileError] = useProfile();
+  if (profileError) return <h1>Error loading profile: {`${profileError}`}</h1>;
+  if (profileLoading) return <h1>Loading user profile</h1>;
+  if (!profile) return <h1>No profile data</h1>;
+
+
+  console.log("Profile: ", profile)
   const filteredSchedule = Object.entries(schedule.courses).filter(
     ([id, course]) => course.term == termSelection
   );
@@ -68,22 +76,17 @@ const CourseTiles = ({
     ([classID, classData]) => classID
   );
 
-  const EditClassButton = ({id}) => (<Link to={`/course_info/${id}`}>
-  <button className="editClass">Edit Class</button>
-</Link>)
+    const EditClassButton = ({id}) => (<Link to={`/course_info/${id}`}>
+    <button className="editClass">Edit Class</button>
+  </Link>)
 
-  const UserExists = ({id}) => {
-    const [user] = useAuthState();
-    return user ? <EditClassButton id={id} /> 
-    : <div> </div> 
+    const UserExists = ({id}) => {
+      // const [user] = useAuthState();
+      return profile.isAdmin ? <EditClassButton id={id} />
+      : <div> </div>
 
-  };
+    };
 
-  // filteredSchedule: array of objects[courseID, courseData]
-  // selectedCourses: array of courseID
-  // selectedCoursesData: array of objects[courseID, courseData]
-
- 
   return (
     <div className="courseList">
       {filteredSchedule.map(([id, course]) => {
@@ -119,8 +122,6 @@ const CourseTiles = ({
             {/* <Link to={`/course_info/${id}`}>
               <button className="editClass">Edit Class</button>
             </Link> */}
-
-
           </div>
         );
       })}
