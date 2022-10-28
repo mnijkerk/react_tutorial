@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import "../CourseTiles.css";
+import { useAuthState } from "../utilities/firebase";
+
 const CourseTiles = ({
   schedule,
   termSelection,
@@ -66,10 +68,22 @@ const CourseTiles = ({
     ([classID, classData]) => classID
   );
 
+  const EditClassButton = ({id}) => (<Link to={`/course_info/${id}`}>
+  <button className="editClass">Edit Class</button>
+</Link>)
+
+  const UserExists = ({id}) => {
+    const [user] = useAuthState();
+    return user ? <EditClassButton id={id} /> 
+    : <div> </div> 
+
+  };
+
   // filteredSchedule: array of objects[courseID, courseData]
   // selectedCourses: array of courseID
   // selectedCoursesData: array of objects[courseID, courseData]
 
+ 
   return (
     <div className="courseList">
       {filteredSchedule.map(([id, course]) => {
@@ -100,9 +114,13 @@ const CourseTiles = ({
             </div>
 
             <div className="meetingTime">{course.meets}</div>
-            <Link to={`/course_info/${id}`}><button className="editClass">
-              Edit Class
-            </button></Link>
+            <UserExists id={id} />
+
+            {/* <Link to={`/course_info/${id}`}>
+              <button className="editClass">Edit Class</button>
+            </Link> */}
+
+
           </div>
         );
       })}
