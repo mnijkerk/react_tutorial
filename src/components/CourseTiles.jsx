@@ -8,14 +8,12 @@ const CourseTiles = ({
   selectedCourses,
   toggleSelected,
 }) => {
-
   const [profile, profileLoading, profileError] = useProfile();
   if (profileError) return <h1>Error loading profile: {`${profileError}`}</h1>;
   if (profileLoading) return <h1>Loading user profile</h1>;
   if (!profile) return <h1>No profile data</h1>;
 
-
-  console.log("Profile: ", profile)
+  console.log("Profile: ", profile);
   const filteredSchedule = Object.entries(schedule.courses).filter(
     ([id, course]) => course.term == termSelection
   );
@@ -76,16 +74,16 @@ const CourseTiles = ({
     ([classID, classData]) => classID
   );
 
-    const EditClassButton = ({id}) => (<Link to={`/course_info/${id}`}>
-    <button className="editClass">Edit Class</button>
-  </Link>)
+  const EditClassButton = ({ id }) => (
+    <Link to={`/course_info/${id}`}>
+      <button className="editClass">Edit Class</button>
+    </Link>
+  );
 
-    const UserExists = ({id}) => {
-      // const [user] = useAuthState();
-      return profile.isAdmin ? <EditClassButton id={id} />
-      : <div> </div>
-
-    };
+  const UserExists = ({ id }) => {
+    // const [user] = useAuthState();
+    return profile.isAdmin ? <EditClassButton id={id} /> : <div> </div>;
+  };
 
   return (
     <div className="courseList">
@@ -108,8 +106,9 @@ const CourseTiles = ({
                 ? console.log("cannot add")
                 : toggleSelected(id);
             }}
+            
           >
-            <div className="courseNumberDescription">
+            <div className="courseNumberDescription" data-cy="course">
               <h3>
                 {course.term} CS {course.number}{" "}
               </h3>

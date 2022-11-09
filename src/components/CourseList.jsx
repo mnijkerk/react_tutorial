@@ -23,7 +23,7 @@ const FilterButton = ({ term, selection, setSelection }) => (
       autoComplete="off"
       onChange={() => setSelection(term)}
     />
-    <label htmlFor={term}>{term}</label>
+    <label htmlFor={term} data-cy={term}>{term}</label>
   </button>
 );
 
