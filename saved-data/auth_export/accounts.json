@@ -3,17 +3,13 @@
   "users": [
     {
       "localId": "chpaPUJxZKwOhyHgq30r99sM40Vj",
+      "createdAt": "1667967253645",
       "lastLoginAt": "1667967253645",
       "displayName": "user1",
       "photoUrl": "",
-      "emailVerified": false,
-      "email": "user1@gmail.com",
-      "salt": "fakeSalth6kNPPzxvryrtMhkrGTA",
       "passwordHash": "fakeHash:salt=fakeSalth6kNPPzxvryrtMhkrGTA:password=user1password",
-      "passwordUpdatedAt": 1667967253645,
-      "validSince": "1667967253",
-      "mfaInfo": [],
-      "createdAt": "1667967253645",
+      "salt": "fakeSalth6kNPPzxvryrtMhkrGTA",
+      "passwordUpdatedAt": 1668034237619,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -23,7 +19,11 @@
           "displayName": "user1",
           "photoUrl": ""
         }
-      ]
+      ],
+      "validSince": "1668034237",
+      "email": "user1@gmail.com",
+      "emailVerified": true,
+      "disabled": false
     }
   ]
 }

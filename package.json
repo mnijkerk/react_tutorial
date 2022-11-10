@@ -9,7 +9,7 @@
     "test": "vitest",
     "cy:open": "cypress open",
     "em:start": "npx kill-port --port 9000,9099,5001,8080 && firebase emulators:start --import=./saved-data --export-on-exit",
-    "em:exec": "set VITE_EMULATE=true &&  npx kill-port --port 9000,9099,5001,8080 && firebase emulators:exec --import=./saved-data \"npm start\"", 
+    "em:exec": "npx kill-port --port 9000,9099,5001,8080 && set VITE_EMULATE=true &&  firebase emulators:exec --ui --import=./saved-data \"npm start\"",
     "em:cy:open": "start-server-and-test em:exec http://127.0.0.1:3000 cy:open"
   },
   "dependencies": {
